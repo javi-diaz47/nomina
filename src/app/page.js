@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className="h-full text-xl text-center min-w-max">
+    <main className="h-full text-xl min-w-max">
       <nav className="grid h-full place-content-center">
         <ul className="flex flex-col gap-8 m-0">
           <li>
