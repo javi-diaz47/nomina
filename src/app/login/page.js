@@ -1,10 +1,12 @@
+import { Button } from '../components/Buttons'
 
 export default function Login() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        login 
-              </div>
+    <main className="flex flex-col items-center justify-between min-h-screen p-24">
+      <div className="z-10 items-center justify-between w-full max-w-5xl font-mono text-sm lg:flex">
+        login
+        <Button title={'Click me'} />
+      </div>
     </main>
-  );
+  )
 }
