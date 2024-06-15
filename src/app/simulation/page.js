@@ -1,12 +1,14 @@
+import { Header } from '../components/Header'
 import { Wrapper } from '../components/Wrapper'
 
-export default function Login() {
+export default function Simulation() {
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen p-24">
-      simulation
-      <Wrapper>
-        <header></header>
-      </Wrapper>
-    </main>
+    <Wrapper>
+      <Header className=" border-black bg-primary border-[1px]">
+        <h2>
+          simulador de <br></br> nómina
+        </h2>
+      </Header>
+    </Wrapper>
   )
 }
