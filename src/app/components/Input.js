@@ -1,8 +1,14 @@
-export const Input = ({ label, name }) => {
+import { twMerge } from 'tailwind-merge'
+
+export const Input = ({ label, name, className = '' }) => {
   return (
-    <div className="flex flex-col items-center justify-center gap-2 text-xl italic">
+    <div
+      className={twMerge(
+        'flex flex-col items-center justify-center gap-2 italic',
+        className
+      )}>
       <label>{label}</label>
-      <input className="w-1/2 p-2 rounded-3xl" name={name} required />
+      <input className="w-3/4 h-8 p-2 rounded-3xl" name={name} required />
     </div>
   )
 }

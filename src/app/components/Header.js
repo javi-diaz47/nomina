@@ -6,7 +6,7 @@ export const Header = ({ children, className = '' }) => {
     <header className="flex items-center justify-center w-full">
       <Button
         className={twMerge(
-          'w-full text-2xl hover:scale-1 flex items-center justify-center',
+          'w-full text-2xl hover:scale-1 flex items-center justify-center cursor-pointer',
           className
         )}>
         {children}
