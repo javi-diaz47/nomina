@@ -10,8 +10,9 @@ export async function register(formData) {
   // type-casting here for convenience
   // in practice, you should validate your inputs
   const data = {
-    name: formData.get('first-name') + formData.get('second-name'),
-    lastname: formData.get('first-lastname') + formData.get('second-lastname'),
+    name: formData.get('first-name') + ' ' + formData.get('second-name'),
+    lastname:
+      formData.get('first-lastname') + '' + formData.get('second-lastname'),
     cc: formData.get('cc'),
     phone: formData.get('phone'),
     enterprise_id: formData.get('enterprise_id'),
