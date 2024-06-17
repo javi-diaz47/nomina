@@ -16,7 +16,7 @@ export default function Home() {
       <Wrapper>
         <div className="grid w-full p-2 overflow-hidden bg-white flex justify-center">
 
-            <h2>{user.email}</h2>
+            <h2>Empleado</h2>
 
         </div>
 
@@ -24,12 +24,17 @@ export default function Home() {
           <ul className="flex flex-col w-full gap-8 m-0">
             <li>
               <Button className="grid h-16 max-w-xs rounded-full place-content-center ">
-                <Link href="crear-nomina">Nómina</Link>
+                <Link href="registrar-empleado">Registrar empleado</Link>
               </Button>
             </li>
             <li>
               <Button className="grid h-16 max-w-xs rounded-full w-80 place-content-center ">
-                <Link href="employee">Empleado</Link>
+                <Link href="eliminar-empleado">Eliminar empleado</Link>
+              </Button>
+            </li>
+            <li>
+              <Button className="grid h-16 max-w-xs rounded-full w-80 place-content-center ">
+                <Link href="modificar-datos-del-empleado">Modificar datos del empleado</Link>
               </Button>
             </li>
           </ul>
