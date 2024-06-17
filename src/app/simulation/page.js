@@ -77,19 +77,21 @@ export default function Simulation() {
           simulador de <br></br> nómina
         </h2>
       </Header>
-      <Button className="relative grid h-16 max-w-xs rounded-full place-content-center">
-        <input
-          onChange={onAddFile}
-          className="absolute w-full px-6 py-2 not-italic text-center text-black uppercase transition-transform ease-in bg-white opacity-0"
-          type="file"
-          accept=".csv"
-          required
-        />
-        {fileName ? 'Cargado' : 'Cargar archivo'}
-      </Button>
-      <Button className="grid h-16 max-w-xs rounded-full place-content-center ">
-        Generar comprobante
-      </Button>
+      <div className="flex flex-col items-center w-full h-full gap-8 place-content-center">
+        <Button className="relative grid h-16 max-w-xs rounded-full place-content-center">
+          <input
+            onChange={onAddFile}
+            className="absolute w-full px-6 py-2 not-italic text-center text-black uppercase transition-transform ease-in bg-white opacity-0"
+            type="file"
+            accept=".csv"
+            required
+          />
+          {fileName ? 'Cargado' : 'Cargar archivo'}
+        </Button>
+        <Button className="grid h-16 max-w-xs rounded-full place-content-center ">
+          <button onClick={onPayroll}>Generar comprobante</button>
+        </Button>
+      </div>
     </Wrapper>
   )
 }

@@ -2,8 +2,8 @@ export const CSV_DELIMETER = ','
 export const HOUR_DELIMETER = ':'
 export const NEWLINE = '\n'
 
-export const DAY_SURCHARGE = 1
-export const NIGHT_SURCHARGE = 2
+export const DAY_SURCHARGE = 7387
+export const NIGHT_SURCHARGE = DAY_SURCHARGE * 1.35
 
 // Constants for day and night time boundaries
 export const DAY_START_HOUR = 6

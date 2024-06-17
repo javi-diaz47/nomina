@@ -1,6 +1,7 @@
 'use client'
 
 import { createClient } from '../../../persistence/supabase/client'
+import { Button } from '../components/Buttons'
 import { Header } from '../components/Header'
 import { Input } from '../components/Input'
 import { Wrapper } from '../components/Wrapper'
@@ -19,16 +20,13 @@ export default function Login() {
   }
   return (
     <Wrapper>
-      <Header>
+      <Header className="grid h-16 mb-16 place-content-center">
         <h2>Iniciar sesión</h2>
       </Header>
-      <form className="flex flex-col justify-center w-full gap-8 h-fit">
-        <Input label="Usuario" name="email" />
-        <Input label="CONTRASEÑA" name="password" type="password" />
-      </form>
-      <button onClick={handleLoginWithOAuth}>Log in</button>
 
-      <p>OLVIDÉ MI CONTRASEÑA</p>
+      <Button className="grid h-12 rounded-full cursor-pointer place-content-center">
+        <button onClick={handleLoginWithOAuth}>Ingresar</button>
+      </Button>
     </Wrapper>
   )
 }
