@@ -1,79 +1,73 @@
 'use client'
 import { Header } from '../components/Header'
 import { Wrapper } from '../components/Wrapper'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { CSV_DELIMETER, NEWLINE } from '../constants'
 import {
-  CSV_DELIMETER,
-  DELIMETER,
-  END_DAY,
-  HOUR_DELIMETER,
-  NEWLINE,
-  NIGHT_SURCHARGE,
-  WEEKDAY,
-} from '../constants'
+  calculateWorkedHours,
+  getDay,
+  getPayroll,
+} from '../utils/genSimulation'
 import { Button } from '../components/Buttons'
 
 export default function Simulation() {
-  const [file, setFile] = useState(undefined)
+  const [records, setRecords] = useState(new Map())
+
+  const [fileName, setFileName] = useState(undefined)
 
   const onAddFile = (ev) => {
     const newFile = ev.target.files[0]
-
-    setFile(newFile)
+    onGetRecords(newFile)
+    setFileName(newFile.name)
   }
 
-  const onSubmit = async (ev) => {
-    ev.preventDefault()
+  const onGetRecords = async (file) => {
     const fileURL = URL.createObjectURL(file)
 
     const response = await fetch(fileURL)
 
-    console.log(fileURL)
     const res = await response.text()
 
     const rows = res.split(NEWLINE)
 
-    const headers = rows.shift()
+    let _ = rows.shift()
 
-    console.log(headers)
-    const map = new Map()
-    //  'Identificación,Apellido,Nombre,Día,Entrada,Salida Break,Entrada Break,Minutos Break,Salida,Horas Trabajadas'
-    // rows.forEach()
-    const getDay = (date) => {
-      return WEEKDAY[new Date(date).getDay()]
-    }
+    const newRecords = new Map()
 
     await rows.forEach((line) => {
       line = line.split(CSV_DELIMETER)
-      console.log(line)
+
       const record = {
         id: line[0],
         name: [line[2], line[1]].join(' '),
         date: line[3],
         day: getDay(line[3]),
-        entry: line[4],
-        break: line[7],
-        departure: line[8],
+        workStart: line[4],
+        breakStart: line[5],
+        breakEnd: line[6],
+        workEnd: line[8],
         hours: line[9],
       }
 
-      const getHourFromString = (hourString) => {
-        const [hour, minute] = hourString.split(HOUR_DELIMETER)
-        return Number(hour) + Number(minute) / 60
+      if (record.id) {
+        // Add record to the map
+        if (!newRecords[record.id]) {
+          newRecords[record.id] = [record]
+        } else {
+          newRecords[record.id].push(record)
+        }
       }
-
-      if (record.entry) {
-        const entryHour = getHourFromString(record.entry)
-        const breakHour = getHourFromString(record.break)
-        const depHour = getHourFromString(record.departure)
-
-        console.log([entryHour, breakHour, depHour])
-      }
-      const newRecords = [...(map.get(record.id) || []), record]
-      map.set(record.id, newRecords)
     })
 
-    console.log(map)
+    setRecords(newRecords)
+  }
+
+  const onPayroll = () => {
+    Object.keys(records).forEach((id) => {
+      const payroll = getPayroll(records[id])
+
+      console.log(payroll, id)
+    })
   }
 
   return (
@@ -83,10 +77,19 @@ export default function Simulation() {
           simulador de <br></br> nómina
         </h2>
       </Header>
-      <form onSubmit={onSubmit} className="flex flex-col gap-4">
-        <input onChange={onAddFile} type="file" accept=".csv" required />
-        <button>Generar</button>
-      </form>
+      <Button className="relative grid h-16 max-w-xs rounded-full place-content-center">
+        <input
+          onChange={onAddFile}
+          className="absolute w-full px-6 py-2 not-italic text-center text-black uppercase transition-transform ease-in bg-white opacity-0"
+          type="file"
+          accept=".csv"
+          required
+        />
+        {fileName ? 'Cargado' : 'Cargar archivo'}
+      </Button>
+      <Button className="grid h-16 max-w-xs rounded-full place-content-center ">
+        Generar comprobante
+      </Button>
     </Wrapper>
   )
 }

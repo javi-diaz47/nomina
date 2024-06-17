@@ -5,11 +5,10 @@ export const NEWLINE = '\n'
 export const DAY_SURCHARGE = 1
 export const NIGHT_SURCHARGE = 2
 
-export const START_DAY = 6
-export const END_DAY = 21
-
-export const START_NIGHT = 21
-export const END_NIGHT = 6
+// Constants for day and night time boundaries
+export const DAY_START_HOUR = 6
+export const DAY_END_HOUR = 21
+export const NIGHT_END_HOUR = 30
 
 export const WEEKDAY = [
   'Sunday',
