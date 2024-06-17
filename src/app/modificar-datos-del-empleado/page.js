@@ -27,7 +27,7 @@ export default function DeleteEmployee() {
         <h2>Selecciona empleado</h2>
       </Header>
       <input value={search} placeholder="buscar" onChange={onSearch} />
-      <ul className="w-full scroll" >
+      <ul className="w-full scroll">
         {employees &&
           employees
             .filter(
@@ -35,8 +35,14 @@ export default function DeleteEmployee() {
                 (e.name + e.lastname).includes(search) || e.cc.includes(search)
             )
             .map((e) => (
-              <Button key={e.id} className="w-full" >
-                <Link href="modificar-empleado">{e.name} {e.lastname}</Link>
+              <Button key={e.id} className="w-full">
+                <Link
+                  href={{
+                    pathname: '/modificar-empelado',
+                    query: { id: e.id },
+                  }}>
+                  {e.name} {e.lastname}
+                </Link>
               </Button>
             ))}
       </ul>

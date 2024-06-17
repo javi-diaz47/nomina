@@ -25,8 +25,6 @@ export async function register(formData) {
     redirect('/error')
   }
 
-  console.log(user)
-
   revalidatePath('/', 'layout')
-  redirect('/private')
+  redirect('/empleado')
 }

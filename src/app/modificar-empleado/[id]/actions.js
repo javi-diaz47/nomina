@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { createClient } from '../../../persistence/supabase/client'
+import { createClient } from '../../../../persistence/supabase/client'
 
 export async function register(formData) {
   const supabase = createClient()

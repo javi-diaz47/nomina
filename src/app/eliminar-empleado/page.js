@@ -5,11 +5,16 @@ import { Header } from '../components/Header'
 import { Wrapper } from '../components/Wrapper'
 import { useState } from 'react'
 import { useEmployee } from '@/logic/hooks/useEmployees'
+import { TrashIcon } from '../../../public/trash'
+import { removeEmployee } from './removeEmployee'
+import { useRouter } from 'next/navigation'
 
 export default function DeleteEmployee() {
   const { isFetching, data: employees } = useEmployee()
 
   const [search, setSearch] = useState('')
+
+  const router = useRouter()
 
   const onSearch = (ev) => {
     const newSearch = ev.target.value
@@ -18,6 +23,11 @@ export default function DeleteEmployee() {
 
   if (isFetching) {
     return <p>Cargando...</p>
+  }
+
+  const onRemove = (id) => {
+    removeEmployee(id)
+    router.push('/empleado')
   }
 
   return (
@@ -34,8 +44,15 @@ export default function DeleteEmployee() {
                 (e.name + e.lastname).includes(search) || e.cc.includes(search)
             )
             .map((e) => (
-              <Button key={e.id} className="w-full">
+              <Button
+                key={e.id}
+                className="flex items-center justify-around w-full hover:scale-1 ">
                 {e.name} {e.lastname}
+                <button
+                  onClick={() => onRemove(e.id)}
+                  className="w-8 h-8 p-1 rounded-lg bg-primary hover:scale-105">
+                  <TrashIcon />
+                </button>
               </Button>
             ))}
       </ul>

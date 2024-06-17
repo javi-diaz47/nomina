@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge'
 
-export const Input = ({ label, name, className = '' }) => {
+export const Input = ({ label, name, className = '', value = '' }) => {
   return (
     <div
       className={twMerge(
@@ -8,7 +8,12 @@ export const Input = ({ label, name, className = '' }) => {
         className
       )}>
       <label>{label}</label>
-      <input className="w-3/4 h-8 p-2 rounded-3xl" name={name} required />
+      <input
+        className="w-3/4 h-8 p-2 rounded-3xl"
+        name={name}
+        defaultValue={value}
+        required
+      />
     </div>
   )
 }
