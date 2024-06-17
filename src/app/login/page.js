@@ -3,9 +3,7 @@
 import { createClient } from '../../../persistence/supabase/client'
 import { Button } from '../components/Buttons'
 import { Header } from '../components/Header'
-import { Input } from '../components/Input'
 import { Wrapper } from '../components/Wrapper'
-import { login, signup } from './actions'
 
 export default function Login() {
   const handleLoginWithOAuth = () => {
@@ -25,7 +23,7 @@ export default function Login() {
       </Header>
 
       <Button className="grid h-12 rounded-full cursor-pointer place-content-center">
-        <button onClick={handleLoginWithOAuth}>Ingresar</button>
+        <button onClick={handleLoginWithOAuth}>Ingresar con Google</button>
       </Button>
     </Wrapper>
   )

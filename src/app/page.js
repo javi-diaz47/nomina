@@ -9,7 +9,7 @@ export default function App() {
         <ul className="flex flex-col gap-8 m-0">
           <li>
             <Button className="w-full max-w-xs bg-highlight">
-              <Link href="/login">iniciar sesión</Link>
+              <Link href="/login">Iniciar sesión con Google</Link>
             </Button>
           </li>
           <li>
