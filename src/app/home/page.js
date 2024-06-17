@@ -29,7 +29,7 @@ export default function Home() {
             </li>
             <li>
               <Button className="grid h-16 max-w-xs rounded-full w-80 place-content-center ">
-                <Link href="employee">Empleado</Link>
+                <Link href="empleado">Empleado</Link>
               </Button>
             </li>
           </ul>
