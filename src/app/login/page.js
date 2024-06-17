@@ -19,8 +19,8 @@ export default function Login() {
     })
   }
   return (
-    <Wrapper>
-      <Header className="grid h-16 mb-16 place-content-center">
+    <Wrapper className="flex justify-center">
+      <Header className="h-16 mb-16">
         <h2>Iniciar sesión</h2>
       </Header>
 

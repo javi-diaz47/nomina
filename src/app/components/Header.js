@@ -3,8 +3,12 @@ import { Button } from './Buttons'
 
 export const Header = ({ children, className = '' }) => {
   return (
-    <header className="w-full ">
-      <Button className={twMerge('w-full text-2xl hover:scale-1', className)}>
+    <header className="flex items-center justify-center w-full">
+      <Button
+        className={twMerge(
+          'w-full text-2xl hover:scale-1 flex items-center justify-center',
+          className
+        )}>
         {children}
       </Button>
     </header>
