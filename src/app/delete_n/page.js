@@ -11,12 +11,13 @@ export default function Home() {
   if (isFetching) {
     return <p>Cargando...</p>
   }
-  if (user?.id) {
+
+  
     return (
       <Wrapper>
         <div className="grid w-full p-2 overflow-hidden ">
           <Header className="overflow-hidden truncate ">
-            <h2>Nomina</h2>
+            <h2>Eliminar nomina</h2>
           </Header>
         </div>
 
@@ -29,12 +30,12 @@ export default function Home() {
             </li>
             <li>
               <Button className="grid h-16 max-w-xs rounded-full w-80 place-content-center ">
-                <Link href="delete_n">Eliminar nomina</Link>
+                <Link href="employee">Eliminar nomina</Link>
               </Button>
             </li>
           </ul>
         </nav>
       </Wrapper>
     )
-  }
+  
 }
