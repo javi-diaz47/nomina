@@ -9,6 +9,8 @@ import {
   getPayroll,
 } from '../utils/genSimulation'
 import { Button } from '../components/Buttons'
+// import { ExportJsonCsv } from 'react-export-json-csv'
+import exportFromJSON from 'export-from-json'
 
 export default function Simulation() {
   const [records, setRecords] = useState(new Map())
@@ -63,10 +65,22 @@ export default function Simulation() {
   }
 
   const onPayroll = () => {
+    const data = []
     Object.keys(records).forEach((id) => {
       const payroll = getPayroll(records[id])
 
+      data.push({
+        name: records[id][0].name,
+        payment: payroll.toFixed(2),
+      })
+
       console.log(payroll, id)
+    })
+
+    exportFromJSON({
+      data,
+      fileName: 'Nomina',
+      exportType: exportFromJSON.types.csv,
     })
   }
 
@@ -90,6 +104,9 @@ export default function Simulation() {
         </Button>
         <Button className="grid h-16 max-w-xs rounded-full place-content-center ">
           <button onClick={onPayroll}>Generar comprobante</button>
+          {/* <ExportJsonCsv headers={headers} items={data}>
+            Export
+          </ExportJsonCsv> */}
         </Button>
       </div>
     </Wrapper>

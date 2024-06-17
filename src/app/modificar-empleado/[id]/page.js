@@ -13,6 +13,8 @@ export default function ModificarEmpleado() {
 
   const { isFetching, data: employee } = useEmployeeById(router.query.id)
 
+  console.log(router.query.id)
+
   if (isFetching) {
     return <p>Cargando...</p>
   }
