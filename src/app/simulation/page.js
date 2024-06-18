@@ -2,18 +2,14 @@
 import { Header } from '../components/Header'
 import { Wrapper } from '../components/Wrapper'
 import { useState } from 'react'
-import { CSV_DELIMETER, NEWLINE } from '../constants'
-import {
-  calculateWorkedHours,
-  getDay,
-  getPayroll,
-} from '../utils/genSimulation'
+import { getPayroll } from '../utils/genSimulation'
 import { Button } from '../components/Buttons'
-// import { ExportJsonCsv } from 'react-export-json-csv'
 import exportFromJSON from 'export-from-json'
+import { readCSV } from '@/logic/readCSV'
+import { generatePayroll } from '@/logic/generatePayroll'
 
 export default function Simulation() {
-  const [records, setRecords] = useState(new Map())
+  const [records, setRecords] = useState()
 
   const [fileName, setFileName] = useState(undefined)
 
@@ -24,62 +20,20 @@ export default function Simulation() {
   }
 
   const onGetRecords = async (file) => {
-    const fileURL = URL.createObjectURL(file)
-
-    const response = await fetch(fileURL)
-
-    const res = await response.text()
-
-    const rows = res.split(NEWLINE)
-
-    let _ = rows.shift()
-
-    const newRecords = new Map()
-
-    await rows.forEach((line) => {
-      line = line.split(CSV_DELIMETER)
-
-      const record = {
-        id: line[0],
-        name: [line[2], line[1]].join(' '),
-        date: line[3],
-        day: getDay(line[3]),
-        workStart: line[4],
-        breakStart: line[5],
-        breakEnd: line[6],
-        workEnd: line[8],
-        hours: line[9],
-      }
-
-      if (record.id) {
-        // Add record to the map
-        if (!newRecords[record.id]) {
-          newRecords[record.id] = [record]
-        } else {
-          newRecords[record.id].push(record)
-        }
-      }
-    })
+    const newRecords = await readCSV(file)
 
     setRecords(newRecords)
   }
 
   const onPayroll = () => {
-    const data = []
-    Object.keys(records).forEach((id) => {
-      const payroll = getPayroll(records[id])
-
-      data.push({
-        name: records[id][0].name,
-        payment: payroll.toFixed(2),
-      })
-
-      console.log(payroll, id)
+    const data = Object.keys(records).map((id) => {
+      const payroll = generatePayroll(records[id])
+      return payroll
     })
 
     exportFromJSON({
       data,
-      fileName: 'Nomina',
+      fileName: 'Mi-Nomina',
       exportType: exportFromJSON.types.csv,
     })
   }
@@ -104,9 +58,6 @@ export default function Simulation() {
         </Button>
         <Button className="grid h-16 max-w-xs rounded-full place-content-center ">
           <button onClick={onPayroll}>Generar comprobante</button>
-          {/* <ExportJsonCsv headers={headers} items={data}>
-            Export
-          </ExportJsonCsv> */}
         </Button>
       </div>
     </Wrapper>

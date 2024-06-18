@@ -24,7 +24,7 @@ export default function Home() {
           <ul className="flex flex-col w-full gap-8 m-0">
             <li>
               <Button className="grid h-16 max-w-xs rounded-full place-content-center ">
-                <Link href="payroll">Nómina</Link>
+                <Link href="nomina">Nómina</Link>
               </Button>
             </li>
             <li>
